@@ -6,6 +6,44 @@
     <title>关于墨方智造 - AI视频创作平台</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        header {
+            background-image: url('images/background.png');
+            background-repeat: repeat-x;
+            background-position: top;
+            padding: 20px;
+            position: relative;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #e6e6e6;
+        }
+        .nav-links {
+            margin-left: auto;
+        }
+        .nav-logo {
+            height: 40px;
+            margin-right: 20px;
+        }
+        .nav-logo img {
+            height: 100%;
+            width: auto;
+            filter: brightness(0) invert(1); /* 使logo在深色背景上显示为白色 */
+        }
         .about-content {
             max-width: 1200px;
             margin: 50px auto;
@@ -18,14 +56,6 @@
         .about-logo img {
             max-width: 300px;
             height: auto;
-        }
-        .nav-logo {
-            height: 40px;
-            margin-right: 20px;
-        }
-        .nav-logo img {
-            height: 100%;
-            width: auto;
         }
         .about-section {
             margin-bottom: 40px;

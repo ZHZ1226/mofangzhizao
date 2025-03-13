@@ -6,6 +6,30 @@
     <title>墨方智造一下，你就知道</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        header {
+            background-image: url('images/background.png');
+            background-repeat: repeat-x;
+            background-position: top;
+            padding: 20px;
+            position: relative;
+        }
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        nav a {
+            color: #fff; /* 改为白色，让链接在背景图上更清晰 */
+            text-decoration: none;
+            font-size: 13px;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #e6e6e6;
+        }
         .search-suggestions {
             position: absolute;
             top: 100%;
