@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索结果 - 墨方智造</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .search-header {
+            background: #f8f9fa;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .search-header .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .search-header .logo img {
+            height: 40px;
+            width: auto;
+            vertical-align: middle;
+        }
+        .search-header .search-box {
+            display: inline-flex;
+            margin-left: 20px;
+            width: 500px;
+        }
+        .search-results {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .result-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .result-item h3 {
+            margin: 0 0 10px 0;
+            color: #1a0dab;
+        }
+        .result-item p {
+            margin: 0;
+            color: #4d5156;
+            line-height: 1.6;
+        }
+        .result-meta {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #70757a;
+        }
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-header">
+        <div class="search-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="logo">
+            </a>
+            <form id="search-form" onsubmit="return handleSearch(event)">
+                <div class="search-box">
+                    <input type="text" id="search-input" autocomplete="off" placeholder="请输入搜索内容">
+                    <button type="submit" id="search-button">搜索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="search-results" id="search-results">
+        <!-- 搜索结果将通过 JavaScript 动态插入 -->
+    </div>
+
+    <script>
+        // 模拟的搜索结果数据
+        const searchResults = {
+            'ai': [
+                {
+                    title: 'AI视频制作完整指南',
+                    content: '本指南详细介绍了如何使用墨方智造的AI视频制作功能，从基础操作到高级技巧，帮助您快速掌握AI视频创作。',
+                    url: 'guides/ai-video-creation.html',
+                    date: '2024-03-15'
+                },
+                {
+                    title: 'AI配音功能详解',
+                    content: '探索墨方智造强大的AI配音功能，支持多种语言和语气，让您的视频配音更专业。',
+                    url: 'features/ai-voice.html',
+                    date: '2024-03-10'
+                }
+            ],
+            '视频': [
+                {
+                    title: '视频模板库使用教程',
+                    content: '浏览并学习如何使用墨方智造提供的专业视频模板，快速创建高质量视频内容。',
+                    url: 'templates/video-templates.html',
+                    date: '2024-03-12'
+                }
+            ],
+            '教程': [
+                {
+                    title: '新手入门：5分钟上手墨方智造',
+                    content: '专为初学者设计的快速入门教程，帮助您迅速掌握墨方智造的基本功能。',
+                    url: 'tutorials/quickstart.html',
+                    date: '2024-03-08'
+                }
+            ]
+        };
+
+        // 获取URL参数中的搜索词
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+
+        // 显示搜索结果
+        function displayResults(query) {
+            const resultsContainer = document.getElementById('search-results');
+            const searchInput = document.getElementById('search-input');
+            
+            // 设置搜索框的值
+            searchInput.value = query;
+
+            // 查找匹配的结果
+            let matchedResults = [];
+            for (let key in searchResults) {
+                if (query.toLowerCase().includes(key) || key.includes(query.toLowerCase())) {
+                    matchedResults = matchedResults.concat(searchResults[key]);
+                }
+            }
+
+            // 显示结果
+            if (matchedResults.length > 0) {
+                resultsContainer.innerHTML = matchedResults.map(result => `
+                    <div class="result-item">
+                        <h3><a href="${result.url}">${result.title}</a></h3>
+                        <p>${result.content}</p>
+                        <div class="result-meta">发布日期：${result.date}</div>
+                    </div>
+                `).join('');
+            } else {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h2>未找到相关结果</h2>
+                        <p>试试其他关键词，如："AI"、"视频"、"教程"等</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 处理搜索提交
+        function handleSearch(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('search-input').value.trim();
+            if (searchTerm) {
+                window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+            }
+            return false;
+        }
+
+        // 如果有搜索词，显示结果
+        if (searchQuery) {
+            displayResults(searchQuery);
+        }
+    </script>
+</body>
+</html> 
